@@ -1293,3 +1293,58 @@ textarea.form-input {
   background: rgba(255, 91, 91, 0.12);
   color: #ff7b7b;
 }
+/* =========================================
+   CONTACT – SUCCESS PAGE
+   ========================================= */
+
+.success-card {
+  background: radial-gradient(circle at top left, #23232a, #14141a);
+  border-radius: 26px;
+  max-width: 420px;
+  width: 100%;
+  padding: 26px 22px 22px;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff;
+
+  background: radial-gradient(circle at 30% 0, #40bfff, #0a84ff);
+  box-shadow:
+    0 0 24px rgba(10, 132, 255, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.success-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.success-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.success-actions .btn {
+  font-size: 14px;
+}
+
