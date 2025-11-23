@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Side Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Your existing global styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <style>
+    /* ========= OVERLAY LAYOUT ========= */
+    body {
+      background: radial-gradient(circle at top, #11111a 0, var(--bg) 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: stretch;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
+        sans-serif;
+    }
+
+    .menu-overlay {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: stretch;
+    }
+
+    /* ========= RIGHT PANEL ========= */
+    .side-menu-panel {
+      width: 100%;
+      max-width: 360px;
+      background: radial-gradient(circle at top left,
+          rgba(35, 35, 44, 0.96),
+          rgba(5, 5, 10, 0.98));
+      border-radius: 26px;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.75);
+      padding: 20px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ========= HEADER (AVATAR + CLOSE) ========= */
+    .side-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .side-menu-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .side-menu-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0a84ff, #4aa8ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 12px 30px rgba(10, 132, 255, 0.6);
+    }
+
+    .side-menu-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-menu-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .side-menu-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .side-menu-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(20, 20, 28, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition:
+        background 0.18s ease,
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .side-menu-close:hover {
+      background: rgba(40, 40, 52, 1);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    /* ========= NAV LIST ========= */
+    .side-menu-nav {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .side-menu-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      text-decoration: none;
+      background: rgba(14, 14, 22, 0.96);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      color: var(--text-main);
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        background 0.15s ease,
+        border 0.15s ease;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .side-menu-link:hover {
+      background: radial-gradient(circle at top left,
+          rgba(32, 36, 52, 0.98),
+          rgba(14, 14, 22, 1));
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.65);
+    }
+
+    .side-menu-link-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at top,
+          rgba(70, 130, 255, 0.25),
+          rgba(12, 12, 18, 0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .side-menu-link-labels {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .side-menu-link-title {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .side-menu-link-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .side-menu-link-arrow {
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    /* active state */
+    .side-menu-link.active {
+      border-color: rgba(10, 132, 255, 0.8);
+      box-shadow: 0 16px 40px rgba(10, 132, 255, 0.55);
+      background: radial-gradient(circle at top left,
+          rgba(10, 132, 255, 0.20),
+          rgba(10, 10, 18, 1));
+    }
+
+    .side-menu-link.active .side-menu-link-title {
+      color: #f5f7ff;
+    }
+
+    /* ========= LOGOUT ========= */
+    .side-menu-footer {
+      margin-top: 4px;
+    }
+
+    .side-menu-logout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #ff3b30, #b31217);
+      box-shadow: 0 18px 40px rgba(255, 59, 48, 0.55);
+      color: #ffffff;
+      font-weight: 500;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .side-menu-logout:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 48px rgba(255, 59, 48, 0.7);
+    }
+
+    .side-menu-logout-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .side-menu-logout-arrow {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    /* small caption in bottom-right (optional) */
+    .side-menu-caption {
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: right;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+      .side-menu-panel {
+        border-radius: 0;
+        max-width: 100%;
+        box-shadow: none;
+      }
+
+      .menu-overlay {
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu-overlay">
+    <aside class="side-menu-panel">
+
+      <!-- Header with avatar + name -->
+      <header class="side-menu-header">
+        <div class="side-menu-profile">
+          <div class="side-menu-avatar">
+            🚗
+          </div>
+          <div class="side-menu-texts">
+            <div class="side-menu-title">DrivePal</div>
+            <div class="side-menu-subtitle">Menu</div>
+          </div>
+        </div>
+
+        <!-- Just visual close icon; you can wire JS if you embed this in a page -->
+        <button class="side-menu-close" type="button">
+          ×
+        </button>
+      </header>
+
+      <!-- Navigation items -->
+      <nav class="side-menu-nav">
+        <a href="home.html" class="side-menu-link active">
+          <div class="side-menu-link-icon">🏠</div>
+          <div class="side-menu-link-labels">
+            <div class="side-menu-link-title">Home</div>
+            <div class="side-menu-link-sub">Browse and book cars</div>
+          </div>
+          <div class="side-menu-link-arrow">›</div>
+        </a>
+
+        <a href="bookings.html" class="side-menu-link">
+          <div class="side-menu-link-icon">📅</div>
+          <div class="side-menu-link-labels">
+            <div class="side-menu-link-title">My Bookings</div>
+            <div class="side-menu-link-sub">Upcoming & past trips</div>
+          </div>
+          <div class="side-menu-link-arrow">›</div>
+        </a>
+
+        <a href="profile.html" class="side-menu-link">
+          <div class="side-menu-link-icon">👤</div>
+          <div class="side-menu-link-labels">
+            <div class="side-menu-link-title">Profile</div>
+            <div class="side-menu-link-sub">Account & details</div>
+          </div>
+          <div class="side-menu-link-arrow">›</div>
+        </a>
+
+        <a href="contact.html" class="side-menu-link">
+          <div class="side-menu-link-icon">📞</div>
+          <div class="side-menu-link-labels">
+            <div class="side-menu-link-title">Contact Us</div>
+            <div class="side-menu-link-sub">Support & questions</div>
+          </div>
+          <div class="side-menu-link-arrow">›</div>
+        </a>
+      </nav>
+
+      <!-- Logout -->
+      <footer class="side-menu-footer">
+        <a href="index.html" class="side-menu-logout">
+          <div class="side-menu-logout-icon">↩</div>
+          <div>Logout</div>
+          <div class="side-menu-logout-arrow">›</div>
+        </a>
+
+        <div class="side-menu-caption">
+          Premium car rental · DrivePal
+        </div>
+      </footer>
+    </aside>
+  </div>
+</body>
+
+</html>
